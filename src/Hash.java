@@ -1,5 +1,3 @@
-// Hash.java
-// Hash class
 // awirth for COMP90056
 // Aug 2017
 
@@ -8,8 +6,8 @@ public class Hash{
 	private int a,b;		// only use for hash tables < 24593 in size
 	
 	public Hash(){
-		a=StdRandom.uniform(p-1)+1;
-		b=StdRandom.uniform(p+1);
+		a= StdRandom.uniform(p-1)+1;
+		b= StdRandom.uniform(p+1);
 		//System.out.format("a %16d b %12d p %12d %n", a,b,p);
 	}
 	public int h2u(int x,int range){

@@ -1,12 +1,13 @@
-// BJKST3.java
 // BJKST3 distinct elements counter
 // awirth for COMP90056
 // Aug 2017
 
+import org.apache.commons.math3.util.Pair;
+
 import java.util.HashSet;
 import java.util.Set;
 
-public class BJKST3 implements Distinct{
+public class BJKST3 implements Distinct {
 	private Hash h;
 	private Hash g;
 	private int z;
@@ -42,7 +43,7 @@ public class BJKST3 implements Distinct{
 				z++;
 				Set<Pair<Integer,Integer>> l = new HashSet<Pair<Integer,Integer>>();
 				for(Pair<Integer,Integer> q:B){
-					if(q.getRight() <z){
+					if(q.getSecond() <z){
 						l.add(q);	
 					}
 				}
@@ -54,5 +55,9 @@ public class BJKST3 implements Distinct{
 	public double distinct(){
 		return B.size()*Math.pow(2, z);
 	}
-	
+
+    @Override
+    public String toString(){
+	    return "BJKST3";
+    }
 }

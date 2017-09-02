@@ -1,4 +1,3 @@
-// Distinct.java
 // Interface for distinct elements counter
 // awirth for COMP90056
 // Aug 2017
@@ -10,4 +9,5 @@ public interface Distinct{
 	
 	void add(Object o);
 	double distinct();
+	String toString();
 }
