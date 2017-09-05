@@ -1,7 +1,7 @@
 /**
  * Created by bryan on 30/08/17.
  */
-public class ProbabilityCounter implements Distinct {
+public class ProbabilityCounter extends Distinct {
     private long sketch = 0;
 
     public long R(long x){
@@ -10,7 +10,9 @@ public class ProbabilityCounter implements Distinct {
 
     @Override
     public void add(Object num){
+        startTimer();
         sketch = sketch | R((Integer)num);
+        stopTimer();
     }
 
     @Override

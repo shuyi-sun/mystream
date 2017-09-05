@@ -14,8 +14,10 @@ public class MeanProbabilityCounter extends ProbabilityCounter {
 
     @Override
     public void add(Object num){
+        startTimer();
         int k = hash.h2u((Integer) num, M);
         sketches[k] = sketches[k] | R((Integer)num);
+        stopTimer();
     }
 
     @Override

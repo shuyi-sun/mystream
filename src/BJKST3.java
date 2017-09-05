@@ -7,7 +7,7 @@ import org.apache.commons.math3.util.Pair;
 import java.util.HashSet;
 import java.util.Set;
 
-public class BJKST3 implements Distinct {
+public class BJKST3 extends Distinct {
 	private Hash h;
 	private Hash g;
 	private int z;
@@ -30,6 +30,7 @@ public class BJKST3 implements Distinct {
 		thresh = 576*eps1*eps1; 
 	}
 	public void add(Object o){
+		startTimer();
 		int val = Hash.h_basic(o,dom);// FIX??
 		int gval = g.h2u(val, ran);
 		int hval = h.h2u(val, dom);
@@ -50,7 +51,7 @@ public class BJKST3 implements Distinct {
 				B.removeAll(l);
 			}
 		}
-		
+		stopTimer();
 	}
 	public double distinct(){
 		return B.size()*Math.pow(2, z);

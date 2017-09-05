@@ -1,43 +1,28 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 // TestDistinct.java
-// Example "main class" for distinct elements counter
-// awirth for COMP90056
+// "main class" for distinct elements counter
+// Shuyi Sun for COMP90056
 // Sep 2017
 
 public class TestDistinct{
 	
 	public static void main(String args[]){
-		int i;
-		
-		int d = 0;
-		
-		//Distinct a = new AMS(0x0fffffff,10);
-		//Distinct b = new BJKST1(0x0001ffff,1);
-		Distinct c = new BJKST3(0x0fffffff,1);
-		
-		if(args.length == 0){
-			System.err.println("No fileName argument.");
-			System.exit(1);
-		}
-		String fileName = args[0];
-		
-		Scanner scanner;
-		try{
-			File f = new File(fileName);
-			scanner = new Scanner(f);
-			String s;
-			while(scanner.hasNextLine()){
-				s = scanner.nextLine();
-				c.add(s);
-			}
-			scanner.close();
-			System.out.format("%12f%n",c.distinct());
-		} catch (FileNotFoundException ex) {
-			System.err.println("No file: "+fileName);
-		}
+        if(args.length != 1){
+            System.out.println("Please only input the file path");
+            System.exit(-1);
+        }
+        CardinalityEstimator estimator = new CardinalityEstimator(args[0]);
+
+        //add all the counters
+        Distinct pc = new ProbabilityCounter();
+        Distinct mpc = new MeanProbabilityCounter(1024);
+        Distinct dc = new DumbCounter();
+        Distinct bjkst3 = new BJKST3(0x0fffffff,1);
+
+        estimator.addCounter(pc);
+        estimator.addCounter(mpc);
+        estimator.addCounter(bjkst3);
+        estimator.addCounter(dc);
+        estimator.test();
 
 	}
 }
