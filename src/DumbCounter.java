@@ -4,12 +4,12 @@ import java.util.HashSet;
  * Created by bryan on 2/09/17.
  */
 public class DumbCounter extends Distinct {
-    private HashSet<Integer> hashSet = new HashSet<>();
+    private HashSet<Object> hashSet = new HashSet<>();
 
     @Override
     public void add(Object o){
         startTimer();
-        hashSet.add((Integer)o);
+        hashSet.add(o);
         startTimer();
     }
 

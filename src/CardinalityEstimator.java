@@ -32,6 +32,7 @@ public class CardinalityEstimator {
                 }
             }
             System.out.println("     Counter type             |      Distinct items     |     Time (ms)  ");
+            System.out.println("-------------------------------------------------------------------------");
             for(Distinct c : counters){
                 System.out.printf("%28s  | %20d    | %8d \n" , c.toString(), (long)c.distinct(), c.getTime());
                 //System.out.println(c.toString() + "     " + (long)c.distinct() + "       " + c.getTime() + " ms");

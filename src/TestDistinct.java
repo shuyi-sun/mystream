@@ -15,13 +15,15 @@ public class TestDistinct{
         //add all the counters
         Distinct pc = new ProbabilityCounter();
         Distinct mpc = new MeanProbabilityCounter(1024);
-        Distinct dc = new DumbCounter();
         Distinct bjkst3 = new BJKST3(0x0fffffff,1);
+        Distinct dc = new DumbCounter();
+        Distinct hll = new HyperLoglogCounter(1024);
 
+        estimator.addCounter(dc);
         estimator.addCounter(pc);
         estimator.addCounter(mpc);
         estimator.addCounter(bjkst3);
-        estimator.addCounter(dc);
+        estimator.addCounter(hll);
         estimator.test();
 
 	}

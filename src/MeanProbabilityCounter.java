@@ -13,10 +13,11 @@ public class MeanProbabilityCounter extends ProbabilityCounter {
     }
 
     @Override
-    public void add(Object num){
+    public void add(Object o){
         startTimer();
-        int k = hash.h2u((Integer) num, M);
-        sketches[k] = sketches[k] | R((Integer)num);
+        int hc = o.hashCode();
+        int k = hash.h2u(hc, M);
+        sketches[k] = sketches[k] | R(hc);
         stopTimer();
     }
 
@@ -24,9 +25,9 @@ public class MeanProbabilityCounter extends ProbabilityCounter {
     public double distinct(){
         int sum = 0;
         for(long l : sketches)
-            sum += Long.bitCount(R(l)-1);
+            sum += r(l);
         double mean = 1.0 * sum / M;
-        return (M * Math.pow(2, mean) / 0.77351);
+        return (M * Math.pow(2, mean) / phi);
     }
 
     @Override
