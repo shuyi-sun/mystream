@@ -27,10 +27,14 @@ public class BJKST3 extends Distinct {
 		//System.out.format("ran %d%n", ran);
 		h = new Hash();
 		g = new Hash();
-		thresh = 576*eps1*eps1; 
+		thresh = 576*eps1*eps1;
+
+		//define 8 variable except set
+		this.space = 4 * 8;
 	}
-	public void add(Object o){
-		startTimer();
+
+	@Override
+	public void count(Object o){
 		int val = Hash.h_basic(o,dom);// FIX??
 		int gval = g.h2u(val, ran);
 		int hval = h.h2u(val, dom);
@@ -51,9 +55,10 @@ public class BJKST3 extends Distinct {
 				B.removeAll(l);
 			}
 		}
-		stopTimer();
 	}
+
 	public double distinct(){
+	    this.space += B.size()*8;
 		return B.size()*Math.pow(2, z);
 	}
 

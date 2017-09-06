@@ -1,20 +1,21 @@
 import java.util.HashSet;
 
 /**
- * Created by bryan on 2/09/17.
+ * This counter is a dumb counter, which uses a hash set to store
+ * all the distinct items. It is used as a baseline for all other
+ * counters.
  */
 public class DumbCounter extends Distinct {
     private HashSet<Object> hashSet = new HashSet<>();
 
     @Override
-    public void add(Object o){
-        startTimer();
+    public void count(Object o){
         hashSet.add(o);
-        startTimer();
     }
 
     @Override
     public double distinct(){
+        this.space = hashSet.size() *4;
         return hashSet.size();
     }
 

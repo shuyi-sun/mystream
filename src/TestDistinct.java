@@ -3,28 +3,34 @@
 // Shuyi Sun for COMP90056
 // Sep 2017
 
+import java.io.FileInputStream;
+import java.util.Scanner;
+
 public class TestDistinct{
 	
 	public static void main(String args[]){
         if(args.length != 1){
-            System.out.println("Please only input the file path");
+            System.out.println("Please input only the file path");
             System.exit(-1);
         }
-        CardinalityEstimator estimator = new CardinalityEstimator(args[0]);
 
-        //add all the counters
-        Distinct pc = new ProbabilityCounter();
-        Distinct mpc = new MeanProbabilityCounter(1024);
-        Distinct bjkst3 = new BJKST3(0x0fffffff,1);
-        Distinct dc = new DumbCounter();
-        Distinct hll = new HyperLoglogCounter(1024);
+        // hyperloglog counter, which can get best performance, with sketch number to 1024
+        HyperLoglogCounter hll = new HyperLoglogCounter(1024);
 
-        estimator.addCounter(dc);
-        estimator.addCounter(pc);
-        estimator.addCounter(mpc);
-        estimator.addCounter(bjkst3);
-        estimator.addCounter(hll);
-        estimator.test();
+        Scanner sc;
+        try{
+            sc = new Scanner(new FileInputStream(args[0]));
+            while (sc.hasNextLine()){
+                //add every line to the counter
+                hll.add(sc.nextLine());
+            }
 
+            //print out the counting result, rounding to long
+            System.out.println((long)hll.distinct());
+
+            sc.close();
+        } catch (Exception e){
+
+        }
 	}
 }
